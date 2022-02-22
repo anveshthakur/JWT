@@ -20,7 +20,10 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         JwtUser jwtUser = jwtRepository.findUserByEmail(email);
-        if(jwtUser == null) throw new UsernameNotFoundException("email not found" + email);
+        if(jwtUser == null){
+            throw new UsernameNotFoundException("email not found" + email);
+//            return
+        }
         return new User(jwtUser.getEmail(), jwtUser.getPassword(), new ArrayList<>());
     }
 }

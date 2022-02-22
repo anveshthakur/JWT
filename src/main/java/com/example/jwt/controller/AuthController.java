@@ -1,6 +1,7 @@
 package com.example.jwt.controller;
 
 import com.example.jwt.dto.ApiResponse;
+import com.example.jwt.dto.JwtResponse;
 import com.example.jwt.dto.LoginRequest;
 import com.example.jwt.dto.SignUpRequest;
 import com.example.jwt.entity.JwtUser;
@@ -76,6 +77,6 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
         final String jwt = jwtUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new ApiResponse(true, jwt));
+        return ResponseEntity.ok(new JwtResponse(true, "Successfully Logged in", jwt));
     }
 }
